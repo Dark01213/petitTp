@@ -87,3 +87,19 @@ Voici les commandes faites pour installer et déployer l'application du début �
 
 ## Déclenchement du déploiement
 - Un simple `git push` sur la branche main déclenche tout le pipeline automatiquement, sans action manuelle.
+
+---
+
+## Preuve de fonctionnement de la VM Azure
+
+Voici une capture d'écran de la VM Azure en cours d'exécution, montrant l'adresse IP publique, la région, la taille et l'état :
+
+![Capture VM Azure](./image.png)
+
+- IP publique : 51.105.240.206
+- Système : Linux (ubuntu 24.04)
+- Taille : Standard B2ts v2
+- Statut : En cours d'exécution
+- Création : 15/01/2026
+
+---
