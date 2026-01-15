@@ -81,7 +81,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN_IMAGE }}
       - name: Build and tag Docker image
         run: |
-          docker buildx build --load -t ${{secrets.DOCKER_USERNAME_IMAGE}}/petittp-api:latest ./api .
+          docker buildx build --load -t ${{secrets.DOCKER_USERNAME_IMAGE}}/petittp-api:latest ./api/dockerfile .
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest
