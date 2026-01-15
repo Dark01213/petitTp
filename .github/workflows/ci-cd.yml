@@ -60,6 +60,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME_IMAGE }}
           password: ${{ secrets.DOCKER_TOKEN_IMAGE }}
+      - name: List files for debug
+        run: ls -l
+      - name: List files in api
+        run: ls -l ./api
       - name: Build and tag Docker image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest ./api
