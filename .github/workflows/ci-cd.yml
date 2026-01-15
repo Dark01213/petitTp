@@ -60,15 +60,9 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME_IMAGE }}
           password: ${{ secrets.DOCKER_TOKEN_IMAGE }}
-      - name: List files in api
-        run: ls -l ./api
-      - name: Docker version
-        run: docker version
-      - name: Docker buildx ls
-        run: docker buildx ls
       - name: Build and tag Docker image
         run: |
-          docker buildx build --load -t ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest ./api
+          docker buildx build --load -t ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest ./api .
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest
