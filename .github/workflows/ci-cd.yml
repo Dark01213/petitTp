@@ -49,24 +49,7 @@ jobs:
       - name: Stop API container
         if: always()
         run: docker stop api-e2e-test || true
-
-  build-and-push-docker:
-    runs-on: ubuntu-latest
-    needs: [unit-tests, e2e-tests]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME_IMAGE }}
-          password: ${{ secrets.DOCKER_TOKEN_IMAGE }}
-      - name: Build and tag Docker image
-        run: |
-          docker buildx build --load -t ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest ./api .
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest
-
+  
   deploy-azure-vm:
     runs-on: ubuntu-latest
     needs: build-and-push-docker
@@ -84,3 +67,23 @@ jobs:
             docker run -d --name myapp -p 8080:8080 ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest
             sleep 5
             curl -f http://localhost:8080/health
+
+
+  build-and-push-docker:
+    runs-on: ubuntu-latest
+    needs: [unit-tests, e2e-tests]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME_IMAGE }}
+          password: ${{ secrets.DOCKER_TOKEN_IMAGE }}
+      - name: Build and tag Docker image
+        run: |
+          docker buildx build --load -t ${{secrets.DOCKER_USERNAME_IMAGE}}/petittp-api:latest ./api .
+      - name: Push Docker image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME_IMAGE }}/petittp-api:latest
+
+  
