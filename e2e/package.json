@@ -1,0 +1,13 @@
+{
+  "name": "petittp-e2e",
+  "version": "1.0.0",
+  "description": "E2E tests for Flask API using Jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}
